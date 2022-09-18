@@ -41,14 +41,7 @@ class MainController extends AbstractController
 
         return $this->renderForm('main/addCancion.html.twig', ["cancionForm"=>$form]);
     }
-    // #[Route('/getinfo/{id}', name: 'getinfo')]
-    // public function getinfo(EntityManagerInterface $em, $id): Response
-    // {
-    //     $respositorio=$em->getRepository(Canciones::class);
-    //     $cancion=$respositorio->find($id);
-
-    //     return $this->render('main/infoCancion.html.twig',["cancion"=>$cancion]);
-    // }
+   
 
     #[Route('/getinfo/{id}', name: 'getinfo')]
     public function getinfo(EntityManagerInterface $em, $id): Response
@@ -56,6 +49,24 @@ class MainController extends AbstractController
         $respositorio = $em->getRepository(Canciones::class);
         $cancion = $respositorio->find($id);
         return $this->render('main/infoCancion.html.twig', ["cancion" => $cancion]);
+    }
+
+    #[Route('/editcancion/{id}', name: 'editcancion')]
+    public function editcancion(Canciones $cancion ,EntityManagerInterface $em, Request $request): Response
+    {
+
+        $form = $this->createForm(AddCancionType::class,$cancion);
+        $form -> handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $cancion = $form->getData();
+            $em->persist($cancion);
+            $em->flush();
+
+            return $this->redirectToRoute("canciones");
+        }
+
+        return $this->renderForm('main/addCancion.html.twig', ["cancionForm"=>$form]);
     }
 }
 
