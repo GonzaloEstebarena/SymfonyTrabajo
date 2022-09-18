@@ -1,0 +1,7 @@
+{% extends 'main/main.html.twig' %}
+{% block body %}
+    {{ form_start(cancionForm) }}
+        {{ form_widget(cancionForm) }}
+        <button type="submit">Añadir nueva cancion</button>
+    {{ form_end(cancionForm) }}
+{% endblock %}

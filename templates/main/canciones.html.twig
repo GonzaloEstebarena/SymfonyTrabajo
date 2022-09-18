@@ -1,0 +1,15 @@
+{% extends 'main/main.html.twig' %}
+{% block body %}
+    <h1>Sección de Canciones</h1>
+    
+    {% for cancion in canciones %}
+
+        
+        <h2 >{{cancion.name}}</h2>
+    
+        <img src="{{cancion.img}}" />
+        
+       <p> <a href="{{path("getinfo", {"id": cancion.id})}}">Más información sobre la cancion</a> </p>
+
+    {% endfor %}
+{% endblock %}

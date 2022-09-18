@@ -1,0 +1,15 @@
+{% extends 'main/main.html.twig' %}
+{% block body %}
+    <h1>{{cancion.name}}</h1>
+    
+   
+        
+         <p>Album:{{cancion.album}}</p>
+        <p>Banda:{{cancion.band}}</p>
+      
+        <p>Año:{{cancion.year}}</p>
+        <img src="{{cancion.img}}" />
+        
+
+    
+{% endblock %}
